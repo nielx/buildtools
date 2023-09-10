@@ -32,6 +32,6 @@ jobs:
       # Common task (for all platforms)
       - name: Build Jam
         run: |
-          cd $GITHUB_WORKSPACE/buildtools/jam
+          cd $GITHUB_WORKSPACE/buildtools/jam &&
           make
 
