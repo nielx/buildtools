@@ -27,7 +27,7 @@ jobs:
 
       # Get the Haiku repository for the build scripts
       - name: Get Haiku Repository
-        run: git clone --depth=1 https://git.haiku-os.org/haiku
+        run: git clone --depth=1 https://review.haiku-os.org/haiku
 
       # Common task (for all platforms)
       - name: Build Jam
