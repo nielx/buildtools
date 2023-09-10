@@ -31,7 +31,7 @@ jobs:
 
       # Common task (for all platforms)
       - name: Build Jam
-      - run: |
+        run: |
           cd {{ github.workspace }}/buildtools/jam
           make
 
