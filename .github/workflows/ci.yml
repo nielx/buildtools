@@ -22,12 +22,16 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+      - name: Get buildtools repository
+        uses: actions/checkout@v4
+        with:
+          path: buildtools
 
-      # Get the Haiku repository for the build scripts
-      - name: Get Haiku Repository
-        run: git clone --depth=1 https://review.haiku-os.org/haiku
+      - name: Get haiku repository
+        uses: actions/checkout@v4
+        with:
+          repository: https://review.haiku-os.org/haiku
+          path: haiku
 
       # Common task (for all platforms)
       - name: Build Jam
