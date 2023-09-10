@@ -45,9 +45,8 @@ jobs:
           make
 
       # Build the toolchain
-      - name: Build toolchain for {{ matrix.arch }}
+      - name: Build toolchain
         run: |
-          /bin/sh 
           SCRIPT="$GITHUB_WORKSPACE/haiku/build/scripts/build_cross_tools"
           MACHINE=""
           if [ {{ matrix.arch }} != "x86_gcc2" ]; then
