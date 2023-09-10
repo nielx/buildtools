@@ -20,6 +20,11 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
+    # We run this job for a number of platforms
+    strategy:
+      matrix:
+        arch: [arm64, x86_64]
+
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: Get buildtools repository
@@ -39,3 +44,14 @@ jobs:
           cd $GITHUB_WORKSPACE/buildtools/jam &&
           make
 
+      # Build the toolchain
+      - name: Build toolchain for {{ matrix.arch }}
+        run: |
+          /bin/sh 
+          SCRIPT="$GITHUB_WORKSPACE/haiku/build/scripts/build_cross_tools"
+          MACHINE=""
+          if [ {{ matrix.arch }} != "x86_gcc2" ]; then
+              SCRIPT="${SCRIPT}_gcc4"
+              MACHINE=$($GITHUB_WORKSPACE/haiku/build/scripts/find_triplet {{ matrix.arch }})
+          fi
+          $SCRIPT $MACHINE $GITHUB_WORKSPACE/haiku $GITHUB_WORKSPACE/buildtools crosstools.{{ matrix.arch }}/cross-tools-{{ matrix.arch }}
