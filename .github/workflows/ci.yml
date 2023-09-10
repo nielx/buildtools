@@ -30,7 +30,7 @@ jobs:
       - name: Get haiku repository
         uses: actions/checkout@v4
         with:
-          repository: https://review.haiku-os.org/haiku
+          repository: haiku/haiku
           path: haiku
 
       # Common task (for all platforms)
