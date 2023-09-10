@@ -45,12 +45,12 @@ jobs:
           make
 
       # Build the toolchain
-      - name: Build toolchain
+      - name: Build toolchain for ${{ matrix.arch }}
         run: |
           SCRIPT="$GITHUB_WORKSPACE/haiku/build/scripts/build_cross_tools"
           MACHINE=""
-          if [ {{ matrix.arch }} != "x86_gcc2" ]; then
+          if [ ${{ matrix.arch }} != "x86_gcc2" ]; then
               SCRIPT="${SCRIPT}_gcc4"
-              MACHINE=$($GITHUB_WORKSPACE/haiku/build/scripts/find_triplet {{ matrix.arch }})
+              MACHINE=$($GITHUB_WORKSPACE/haiku/build/scripts/find_triplet ${{ matrix.arch }})
           fi
-          $SCRIPT $MACHINE $GITHUB_WORKSPACE/haiku $GITHUB_WORKSPACE/buildtools crosstools.{{ matrix.arch }}/cross-tools-{{ matrix.arch }}
+          $SCRIPT $MACHINE $GITHUB_WORKSPACE/haiku $GITHUB_WORKSPACE/buildtools crosstools.${{ matrix.arch }}/cross-tools-${{ matrix.arch }}
